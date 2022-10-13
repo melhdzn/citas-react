@@ -7,6 +7,9 @@ function App() {
     <>
       <Header/>
       <ListadoPaciente/>
+
+      <formulario/>
+      <Error/>
     </>
   )
 }
