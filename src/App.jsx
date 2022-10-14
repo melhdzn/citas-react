@@ -1,16 +1,19 @@
 import Header from "./componentes/header.jsx"
-import ListadoPaciente from "./componentes/listadoPaciente.jsx"
-
+import ListadoPaciente from "./componentes/ListadoPaciente.jsx"
+import Paciente from "./componentes/Paciente.jsx"
+import Formulario from "./componentes/formulario.jsx"
+import Costos from "./componentes/Costos.jsx"
 function App() {
 
   return (
-    <>
-      <Header/>
-      <ListadoPaciente/>
-
-      <formulario/>
-      <Error/>
-    </>
+    <div className="container mx-auto mt-15">
+      <Header />
+      <ListadoPaciente />
+      <Paciente />
+      <Formulario/>
+      <Costos/>
+      
+    </div>
   )
 }
 export default App
