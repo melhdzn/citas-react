@@ -1,34 +1,47 @@
 import Header from "./componentes/header.jsx"
-import ListadoPaciente from "./componentes/ListadoPaciente.jsx"
-import Paciente from "./componentes/Paciente.jsx"
+import ListadoPaciente from "./componentes/listadoPaciente.jsx"
 import Formulario from "./componentes/formulario.jsx"
-import Error from "./componentes/Error.jsx"
-import { useState } from "react"
 
+import { useEffect, useState } from "react";
 
 function App() {
 
-  const[Pacientes,setPacientes]=useState([])
-  const [Paciente, setPaciente]=useState([])
-  
-  
+  const [pacientes, setPacientes] = useState([]);
+  const [paciente, setPaciente] = useState({});
+
+  const eliminarPaciente = id => {
+    const pacientesActualizados = pacientes.filter(paciente => paciente.id !== id)
+    setPacientes(pacientesActualizados)
+
+  }
+  useEffect(()=>{
+    const obtenerLS=()=>{
+    const registrosLS = JSON.parse(localStorage.getItem('pacientes'))??[]
+    setPacientes(registrosLS)
+    }
+    obtenerLS();
+  },[])
+
+useEffect(()=>{
+  localStorage.setItem('pacientes',JSON.stringify(pacientes))
+},[pacientes])
+
+
   return (
     <div className="container mx-auto mt-15">
-      <Header/ >
-
-      <div className="md-flex">
-      <Formulario
-       pacientes={Pacientes}
-       setPacientes={setPacientes}
-       Paciente={Paciente}
-       setPaciente={setPaciente}/>
-      <ListadoPaciente />
-      
+      <Header />
+      <div className="md:flex">
+        <Formulario
+          pacientes={pacientes}
+          setPacientes={setPacientes}
+          paciente={paciente}
+          setPaciente={setPaciente} />
+        <ListadoPaciente
+          pacientes={pacientes}
+          setPaciente={setPaciente}
+          eliminarPaciente={eliminarPaciente} />
       </div>
-      
     </div>
   )
 }
-export default App
-
-
+export default App;
